@@ -1,0 +1,92 @@
+print("-------------------------\nCriptografar ----- 1\nDescriptografar -- 2")
+n=input("O que deseja fazer? ")
+
+if n=='1':
+    palavra = input("Digite a frase ou palavra para ser criptografada: ").upper()
+    palavral=[]
+    chavel=[]
+    for x in palavra:
+        palavral.append(x)
+    chave = input("Digite a chave: ").upper()
+    for x in chave:
+        if x!=' ':
+            chavel.append(x)
+    if len(chavel)<len(palavral):
+        for x in range(len(palavral)-len(chavel)):
+            chavel.append(chavel[x])
+    else:
+        for x in range(len(chavel)-len(palavral)):
+            del chavel[len(chavel)-1]
+
+    novalista=[]
+    tabela=[]
+    lista=[]
+    alfabeto=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    for y in range(27):
+        lista=[]
+        for x in alfabeto:
+            lista.append(x)
+        a = alfabeto[0]
+        del alfabeto[0]
+        alfabeto.insert(len(alfabeto),a)
+        tabela.append(lista)
+    indice=0
+    palavracrip=[]
+    for x in palavral:
+        if x.isalnum()==False:
+           palavracrip.append(x)
+        else:
+            posicao=tabela[0].index(x)
+            for y in tabela:
+                if y[0] == chavel[indice]:
+                    posicao2=tabela.index(y)
+            calculo=posicao+posicao2
+            if calculo>len(tabela[0])-1:
+                calculo = calculo - 26
+            palavracrip.append(tabela[0][calculo])
+            indice+=1
+    print(''.join(palavracrip))
+elif n=='2':
+    palavra = input("Digite a frase ou palavra para ser descriptografada: ").upper()
+    palavral = []
+    chavel = []
+    for x in palavra:
+        palavral.append(x)
+    chave = input("Digite a chave: ").upper()
+    for x in chave:
+        if x != ' ':
+            chavel.append(x)
+    if len(chavel) < len(palavral):
+        for x in range(len(palavral) - len(chavel)):
+            chavel.append(chavel[x])
+    else:
+        for x in range(len(chavel) - len(palavral)):
+            del chavel[len(chavel) - 1]
+
+    novalista = []
+    tabela = []
+    lista = []
+    alfabeto = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                'V', 'W', 'X', 'Y', 'Z']
+    for y in range(27):
+        lista = []
+        for x in alfabeto:
+            lista.append(x)
+        a = alfabeto[0]
+        del alfabeto[0]
+        alfabeto.insert(len(alfabeto), a)
+        tabela.append(lista)
+    indice = 0
+    palavracrip = []
+    for x in palavral:
+        if x.isalnum() == False:
+            palavracrip.append(x)
+        else:
+            c = tabela[0].index(x)
+            for y in tabela:
+                if y[0]==chavel[indice]:
+                    k = tabela.index(y)
+            indice+=1
+            calculo = c - k
+            palavracrip.append(tabela[0][calculo])
+    print(''.join(palavracrip))
