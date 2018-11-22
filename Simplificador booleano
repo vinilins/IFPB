@@ -503,8 +503,17 @@ def funcaoai():
             saida.insert(INSERT, "Digite apenas binários!")
 
     except:
-        saida.delete("1.0", END)
-        saida.insert(INSERT, "Digite apenas binários com espaçamento  entre cada número!")
+        global contador
+        contador = 0
+        for x in Entrada:
+            if x=='0':
+                contador+=1
+        if contador==len(Entrada):
+            saida.delete("1.0", END)
+            saida.insert(INSERT, "Digite no mínimo uma saída com valor 1!")
+        else:
+            saida.delete("1.0", END)
+            saida.insert(INSERT, "Digite apenas binários com espaçamento  entre cada número!")
 
 
 
