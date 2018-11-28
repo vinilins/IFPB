@@ -275,12 +275,12 @@ def funcaoai():
                 if P == 'NoPatrick':
                     if len(Entrada) == len(Ma):
                         resultadofinal=1
-                    elif len(cx2) == 2 and len(Mapa2) > 2:
+                    elif len(cx2) == 2 and len(Mapa2) > 2 and Var <= 2:
                         cx2=(Essenciais(Mapa2,cx2))
                         resultadofinal=ultimafuncao(cx2)
                     elif len(cx2) == 1 and len(cxx[0][1]) == len(Ma):
                       resultadofinal=ultimafuncao(cx2)
-                    elif Var>3:
+                    elif Var>2:
                         Mapa3 = FMapa(fd)
                         Mapaind = []
                         for i in Mapa3:
@@ -344,8 +344,6 @@ def funcaoai():
                                     if type(Mapa2[x][y]) != list:
                                         Mapa2[x][y] = ' '
                         f = []
-
-
                         def OnPatrick(Mapa2, f):
                             for x in range(len(Mapa2[0])):
                                 c = []
@@ -363,65 +361,18 @@ def funcaoai():
                         while [] in lista:
                             ind = lista.index([])
                             del (lista[ind])
-                        f = []
-                        def Rec(list, f):
-                            if list == []:
-                                list = f[:]
-                                f = []
-                            if len(list) == 1:
-                                f.append(list[0])
-                                list = f[:]
-                                f = []
-                            l = []
-                            for i in list[0]:
-                                for i2 in list[1]:
-                                    b = i + i2
-                                    l.append(b)
-                            f.append(l)
-                            if len(f) == 1 and len(list) == 2:
-                                return l
-                            if len(list) == 2:
-                                del (list[0])
-                                del (list[0])
-                            if len(list) > 1:
-                                del (list[0])
-                                if len(list) != 1:
-                                    del (list[0])
-                            return Rec(list, f)
-                        if lista == []:
-                            resultadofinal=ultimafuncao(cx2)
-                            quit()
-                        xx = Rec(lista, f)
-                        list2, co, c, cv = xx, 0, '', 0
-                        for i in list2:
-                            l = []
-                            for i2 in range(len(i)):
-                                l.append(i[i2])
-                            for i3 in l:
-                                if l.count(i3) > 1:
-                                    ind = l.index(i3)
-                                    l[ind] = '0'
-                            co += 1
-                            xc = ''.join(l)
-                            ind = list2.index(i)
-                            list2[ind] = xc
-                        for i in list2:
-                            if i.count('0') >= cv:
-                                x = i.count('0')
-                                cv = x
-                                c = i
-                        Mapaf = {}
-                        for i in Mapa:
-                            Mapaf[i] = Mapa[i]
-                        l = []
-                        for i in Mapaf:
-                            for i2 in c:
-                                if i2 == i:
-                                    l.append(Mapaf[i][0])
-                        l = l + listae
-                        resultadofinal=ultimafuncao(l)
+                        if lista != []:
+                            for i in lista:
+                                x = i[0]
+                                E = Mapa[x][0]
+                                cx2.append(E)
+                                break
+                        if lista == [] or len(lista) == 1:
+                            resultadofinal = ultimafuncao(cx2)
+                        else:
+                            resultadofinal = ultimafuncao(cx2)
                     else:
-                        resultadofinal=ultimafuncao(cx2)
+                        resultadofinal = ultimafuncao(cx2)
                 else:
                     Mapaind = []
                     for i in Mapa:
@@ -497,11 +448,10 @@ def funcaoai():
                 saida.insert(INSERT, resultadofinal)
             else:
                 saida.delete("1.0", END)
-                saida.insert(INSERT, "Digite uma quantidade válida de binários!")
+                saida.insert(INSERT, "Digite uma quantidade válida de bináriospois você digitou {}!".format(contadormaster-1))
         else:
             saida.delete("1.0", END)
             saida.insert(INSERT, "Digite apenas binários!")
-
     except:
         global contador
         contador = 0
@@ -514,9 +464,6 @@ def funcaoai():
         else:
             saida.delete("1.0", END)
             saida.insert(INSERT, "Digite apenas binários com espaçamento  entre cada número!")
-
-
-
 i.geometry("400x300")
 i.title("Simplificador")
 saida = Text(i, height = 3, width = 40)
@@ -524,7 +471,7 @@ saida.insert(INSERT, "")
 entry1 = Entry(i)
 texto0 = Label(i, text="")
 texto1 = Label(i, text="Simplificador de Expressões Booleanas", font = "Arial 15")
-texto11 = Label(i, text="Formato de entrada: X X X X X X X X", font = "Arial 8")
+texto11 = Label(i, text="Formato de entrada: binários com um espaçamento entre eles", font = "Arial 8")
 texto2 = Label(i,text="Resultado:", font = "Arial 12")
 botao = Button(i, text="Simplificar", height=1, width=15, font="Arial 15", command = funcaoai)
 texto0.pack()
