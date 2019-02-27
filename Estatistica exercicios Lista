@@ -1,3 +1,4 @@
+import time
 def nested_sum(x):
     calc = 0
     for i in x:
@@ -16,9 +17,16 @@ def cumsum(x):
     return new_list
 
 def middle(x):
-    del x[0]
-    del x[-1]
-    return x
+    tam = 0
+    lista=[]
+    if len(x)%2==0:
+        tam = len(x)//2
+        lista.append(tam)
+        lista.append(tam+1)
+    else:
+        tam = len(x)//2
+        lista.append(tam+1)
+    return lista
 
 def chop(x):
     del x[0]
@@ -56,13 +64,79 @@ def birthday_paradox(x):
     calc = calc*100
     return calc
 
-def read_txt(x):
-    x.read
+def read_txt1(x):
     list=[]
+    cont = -1
+    cont2 = -1
     str=''
     for i in x:
-        if x==' ':
-            str = 
-            list.append()
-    
-print(birthday_paradox(57))
+        str+=i
+    for i in str:
+        cont+=1
+        if i==' ':
+            palavra = str[cont2+1:cont]
+            cont2 = cont
+            list.append(palavra)
+    print(list)
+
+def read_txt2(x):
+    list=[]
+    cont = -1
+    cont2 = -1
+    str=''
+    for i in x:
+        str+=i
+    for i in str:
+        cont+=1
+        if i==' ':
+            palavra = str[cont2+1:cont]
+            cont2 = cont
+            list = list + [palavra]
+    print(list)
+
+""""
+txt = open("x.txt","r")
+ini = time.time()
+read_txt1(txt)
+fim = time.time()
+calc = fim - ini
+print(calc)
+
+txt = open("x.txt","r")
+ini = time.time()
+read_txt2(txt)
+fim = time.time()
+calc = fim - ini
+print(calc)
+"""
+
+def in_bisect(list,pal,a):
+    tamreal = len(list)
+    tam = len(list)//2
+    if pal[a] > list[tam][a] and list[tam] != pal:
+        a+=1
+        in_bisect(list,pal,a)
+    elif pal[a] < list[tam][a] and list[tam] != pal:
+        a+=1
+        in_bisect(list,pal,a)
+    elif pal[a] == list[tam][a] and list[tam] != pal:
+        a+=1
+
+    elif pal == list[tam-1]:
+        return tam
+    return None
+''''
+a = 0
+print(in_bisect(["anuencia","analogo","amor","algoz","alienado","audacia"],"algoz",a))
+'''
+
+def par_inverso(x):
+    lista = []
+    for i in x:
+        for y in x:
+            if i == y[::-1]:
+                lista.append(i)
+                x.remove(y)
+    return lista
+
+print(par_inverso(["amor","roma","peixe","exiep"]))
