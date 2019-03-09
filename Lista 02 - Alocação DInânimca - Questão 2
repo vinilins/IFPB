@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+  int codigo;
+  char nome[51];
+  int idade;
+  double salario;
+  char rua[51];
+  char bairro[51];
+  int cep;
+
+}TCliente;
+
+void imprimeCliente(TCliente *cliente){
+  printf("\n");
+  printf("Nome: %s\n",cliente->nome);
+  printf("Código: %d\n",cliente->codigo);
+  printf("Idade: %d\n",cliente->idade);
+  printf("Salário: %.2lf\n",cliente->salario);
+  printf("Rua: %s\n",cliente->rua);
+  printf("Bairro: %s\n",cliente->bairro);
+  printf("CEP: %d\n",cliente->cep);
+}
+
+int main(void) {
+  TCliente *cliente;
+  printf("Digite o nome:\n");
+  scanf(" %[^\n]s",cliente->nome);
+  printf("Digite o código:\n");
+  scanf("%d",&cliente->codigo);
+  printf("Digite a idade:\n");
+  scanf("%d",&cliente->idade);
+  printf("Digite o salário:\n");
+  scanf("%lf",&cliente->salario);
+  printf("Digite a rua:\n");
+  scanf(" %[^\n]s",cliente->rua);
+  printf("Digite o bairro:\n");
+  scanf(" %[^\n]s",cliente->bairro);
+  printf("Digite o CEP:\n");
+  scanf("%d",&cliente->cep);
+  imprimeCliente(cliente);
+  return 0;
+}
