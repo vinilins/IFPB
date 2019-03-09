@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+  char rua[51];
+  char bairro[51];
+  int cep;
+}TEndereco;
+
+typedef struct{
+  int codigo;
+  char nome[51];
+  int idade;
+  double salario;
+  TEndereco endereco;
+
+}TCliente;
+
+void imprimeCliente(){
+  TCliente *cliente;
+  printf("\n");
+  printf("Nome: %s\n",cliente->nome);
+  printf("Código: %d\n",cliente->codigo);
+  printf("Idade: %d\n",cliente->idade);
+  printf("Salário: %.2lf\n",cliente->salario);
+  printf("Rua: %s\n",cliente->endereco.rua);
+  printf("Bairro: %s\n",cliente->endereco.bairro);
+  printf("CEP: %d\n",cliente->endereco.cep);
+}
+
+void lerCliente(void) {
+  TCliente *cliente;
+  printf("\nCadastrar novo cliente\n---------------\nDigite o nome:\n");
+  scanf(" %[^\n]s",cliente->nome);
+  printf("Digite o código:\n");
+  scanf("%d",&cliente->codigo);
+  printf("Digite a idade:\n");
+  scanf("%d",&cliente->idade);
+  printf("Digite o salário:\n");
+  scanf("%lf",&cliente->salario);
+  printf("Digite a rua:\n");
+  scanf(" %[^\n]s",cliente->endereco.rua);
+  printf("Digite o bairro:\n");
+  scanf(" %[^\n]s",cliente->endereco.bairro);
+  printf("Digite o CEP:\n");
+  scanf("%d",&cliente->endereco.cep);
+}
+
+void alterarEndereco(){
+  TCliente *cliente;
+  printf("Digite a rua:\n");
+  scanf(" %[^\n]s",cliente->endereco.rua);
+  printf("Digite o bairro:\n");
+  scanf(" %[^\n]s",cliente->endereco.bairro);
+  printf("Digite o CEP:\n");
+  scanf("%d",&cliente->endereco.cep);
+}
+
+void destruirCliente(){
+  TCliente *cliente;
+  
+
+}
+
+int main(){
+  int num;
+  while(1){
+    printf("\nMENU PRINCIPAL\n---------------\n1 - Cadastrar novo cliente\n2 - Ver dados de cliente\n3 - Alterar endereço\n4 - Destruir cliente\n5 - Sair\nDigite sua opção: ");
+    scanf("%d",&num);
+    if(num==5) break;
+    else if(num==1){
+      lerCliente();
+    }
+    else if(num==2){
+      imprimeCliente();
+    }
+    else if(num==3){
+      alterarEndereco();
+    }
+    else if(num==4){
+      destruirCliente();
+    }
+  }
+
+}
