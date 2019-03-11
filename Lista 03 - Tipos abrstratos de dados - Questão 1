@@ -1,0 +1,55 @@
+MAINALUNO.C
+
+#include <stdio.h>
+#include <aluno.h>
+
+int main(){
+  TAluno *aluno1 = criarAluno("vinicius",15,2.8); 
+  imprimirDados(aluno1);
+
+}
+
+
+ALUNO.C
+
+#include <stdio.h>
+#include "aluno.h"
+#include <stdlib.h>
+
+TAluno* criarAluno(char *nome,int idade,float altura){
+  TAluno *p = NULL;
+  if((p = (TAluno*) malloc( sizeof(TAluno))) == NULL) return NULL;
+
+  p->*nome = *nome;
+  p->idade = idade;
+  p->altura = altura;
+  return p;
+}
+
+void liberarAluno(TAluno *aluno){
+  if(aluno != NULL) free(aluno);
+}
+
+void imprimirDados(TAluno *aluno){
+  printf("Nome: %s\n",aluno->nome);
+  printf("Idade: %d\n",aluno->idade);
+  printf("Altura: %f\n",aluno->altura);
+}
+
+ALUNO.H
+
+#include <stdio.h>
+
+typedef struct{
+  char nome[41];
+  int idade;
+  float altura;
+}TAluno;
+
+TAluno* criarAluno(char nome[],int idade,float altura);
+
+void liberarAluno(TAluno *aluno);
+
+void imprimirDados(TAluno *aluno);
+
+void modificarDados(TAluno *aluno, char novo_nome[], int nova_idade, float nova_altura);
