@@ -64,10 +64,6 @@ int *splitInt(char entrada[100000], int *quant){
         }
     }
 
-
-
-
-
     return pont;
 
 
@@ -75,10 +71,13 @@ int *splitInt(char entrada[100000], int *quant){
 
 int main(void) {
   int *quant, *numeros,i;
-  char nome[] = "   1    383482732 3 444 555 6 234";
+  char nome[100000];
+  printf("Digite sua entrada contendo somente números positivos inteiros e espaços:\n");
+  scanf(" %[^\n]s",nome);
   numeros = splitInt(nome,quant);
-  for(i=0;i<*quant;i++){
+  for(i=0;numeros[i]!='\0';i++){
     printf("%d ",numeros[i]);
   }
+  printf("\n");
   return 0;
 }
