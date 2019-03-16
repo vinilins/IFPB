@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+int verifyListInt(char entrada[100000]){
+    int cont1=0,j,tam = strlen(entrada);
+    for(j=0;j<tam;j++){
+        if(isspace(entrada[tam-1])){
+            if(isdigit(entrada[j])==0 && isspace(entrada[j]==0)) return 0;
+            if(isdigit(entrada[j]) && isspace(entrada[j+1])) cont1++;
+            else if(isdigit(entrada[j]) && isdigit(entrada[j+1])) continue;
+                }
+        else if(isdigit(entrada[tam-1])){
+            if(isdigit(entrada[j])==0 && isspace(entrada[j])==0) return 0;
+            if(isdigit(entrada[j]) && isspace(entrada[j+1])) cont1++;
+            else if(isdigit(entrada[j]) && isspace(entrada[j+1])==0 && isalpha(entrada[j+1])==0 && j+1==tam-1){cont1++; break;}
+            else if(isdigit(entrada[j]) && isdigit(entrada[j+1])) continue;
+        }
+    }
+    return cont1;
+}
+
+int *splitInt(char entrada[100000], int *quant){
+    int *pont;
+    *quant = verifyListInt(entrada);
+    if(*quant==0) return NULL;
+    pont =(int*)malloc(*quant*sizeof(int));
+    char num[100000];
+    int j,tam = strlen(entrada),k,cont2=0;
+    for(j=0;j<tam;j++){
+        if(isspace(entrada[tam-1])){
+            if(isdigit(entrada[j])){
+                int cont1=0;
+                while(isspace(entrada[j])==0){
+                    num[cont1] = entrada[j];
+                    j++;
+                    cont1++;
+                }
+                num[cont1]='\0';
+                int add = atoi(num);
+                pont[cont2] = add;
+                cont2++;
+            }
+        }
+        else if(isdigit(entrada[tam-1])){
+            if(isdigit(entrada[j])){
+                int cont1=0;
+                while(isspace(entrada[j])==0){
+                  if(j==tam-1) {
+                    num[cont1] = entrada[j];
+                    cont1++;
+                    break;
+                  }
+                    num[cont1] = entrada[j];
+                    j++;
+                    cont1++;
+                }
+                num[cont1]='\0';
+                int add = atoi(num);
+                pont[cont2] = add;
+                cont2++;
+            }
+        }
+    }
+
+
+
+
+
+    return pont;
+
+
+}
+
+int main(void) {
+  int *quant, *numeros,i;
+  char nome[] = "1 2 3 444  555 6 234 ";
+  numeros = splitInt(nome,quant);
+  for(i=0;i<*quant;i++){
+    printf("%d ",numeros[i]);
+  }
+  return 0;
+}
