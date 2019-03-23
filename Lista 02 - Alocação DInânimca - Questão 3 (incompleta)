@@ -5,70 +5,82 @@
 typedef struct{
   char rua[51];
   char bairro[51];
-  long cep;
+  int cep;
 }TEndereco;
 
 typedef struct{
-  long codigo;
+  int codigo;
   char nome[51];
-  long idade;
+  int idade;
   float salario;
-  TEndereco endereco;
+  TEndereco* endereco;
 
 }TCliente;
 
 void imprimeCliente(TCliente *cliente){
+  if(cliente!=NULL){
   printf("\n");
   printf("Nome: %s\n",cliente->nome);
-  printf("Código: %ld\n",cliente->codigo);
-  printf("Idade: %ld\n",cliente->idade);
-  printf("Salário: %.2lf\n",cliente->salario);
-  printf("Rua: %s\n",cliente->endereco.rua);
-  printf("Bairro: %s\n",cliente->endereco.bairro);
-  printf("CEP: %ld\n",cliente->endereco.cep);
+  printf("Código: %d\n",cliente->codigo);
+  printf("Idade: %d\n",cliente->idade);
+  printf("Salário: %.2f\n",cliente->salario);
+  printf("Rua: %s\n",cliente->endereco->rua);
+  printf("Bairro: %s\n",cliente->endereco->bairro);
+  printf("CEP: %d\n",cliente->endereco->cep);
+  }
 }
 
-void lerCliente(TCliente *cliente){
-  printf("\nCadastrar novo cliente\n---------------\nDigite o nome:\n");
-  scanf(" %[^\n]s",cliente->nome);
-  printf("Digite o código:\n");
-  scanf("%ld",&cliente->codigo);
-  printf("Digite a idade:\n");
-  scanf("%ld",&cliente->idade);
-  printf("Digite o salário:\n");
-  scanf("%f",&cliente->salario);
-  printf("Digite a rua:\n");
-  scanf(" %[^\n]s",cliente->endereco.rua);
-  printf("Digite o bairro:\n");
-  scanf(" %[^\n]s",cliente->endereco.bairro);
-  printf("Digite o CEP:\n");
-  scanf("%ld",&cliente->endereco.cep);
+TCliente* lerCliente(TCliente *cliente, char nome[],int codigo, int idade, float salario, char rua[],char bairro[],int cep){
+  cliente = (TCliente*)malloc(sizeof(TCliente));
+  if(cliente==NULL) {printf("Memória insuficiente"); return 0;}
+  strcpy(cliente->nome,nome);
+  cliente->codigo = codigo;
+  cliente->idade = idade;
+  cliente->salario = salario;
+  cliente->endereco = (TEndereco*)malloc(sizeof(TEndereco));
+  strcpy(cliente->endereco->rua,rua);
+  strcpy(cliente->endereco->bairro,bairro);
+  cliente->endereco->cep = cep;
+  return cliente;
 }
 
 void alterarEndereco(TCliente *cliente){
   printf("Digite a rua:\n");
-  scanf(" %[^\n]s",cliente->endereco.rua);
+  scanf(" %[^\n]s",cliente->endereco->rua);
   printf("Digite o bairro:\n");
-  scanf(" %[^\n]s",cliente->endereco.bairro);
+  scanf(" %[^\n]s",cliente->endereco->bairro);
   printf("Digite o CEP:\n");
-  scanf("%ld",&cliente->endereco.cep);
+  scanf("%d",&cliente->endereco->cep);
 }
 
 
 int main(){
   int num;
+  TCliente *ponteiro = NULL;
   while(1){
-    TCliente cliente;
-    TCliente *ponteiro;
-    ponteiro = (TCliente*)malloc(sizeof(TCliente));
-    ponteiro = &cliente;
-    if(ponteiro==NULL) {printf("Memória insuficiente"); return 0;}
     printf("\nMENU PRINCIPAL\n---------------\n1 - Cadastrar novo cliente\n2 - Ver dados de cliente\n3 - Alterar endereço\n4 - Destruir cliente\n5 - Sair\nDigite sua opção: ");
     scanf("%d",&num);
     if(num==5) break;
     else if(num==1){
-      lerCliente(ponteiro);
-    }
+      char nome[51],rua[51],bairro[51];
+      int codigo, idade,cep;
+      float salario;
+      printf("\nCadastrar novo cliente\n---------------\nDigite o nome:\n");
+      scanf(" %[^\n]s",nome);
+      printf("Digite o código:\n");
+      scanf("%d",&codigo);
+      printf("Digite a idade:\n");
+      scanf("%d",&idade);
+      printf("Digite o salário:\n");
+      scanf("%f",&salario);
+      printf("Digite a rua:\n");
+      scanf(" %[^\n]s",rua);
+      printf("Digite o bairro:\n");
+      scanf(" %[^\n]s",bairro);
+      printf("Digite o CEP:\n");
+      scanf("%d",&cep);
+      ponteiro = lerCliente(ponteiro,nome,codigo,idade,salario,rua,bairro,cep);
+  }
     else if(num==2){
       imprimeCliente(ponteiro);
     }
@@ -76,6 +88,7 @@ int main(){
       alterarEndereco(ponteiro);
     }
     else if(num==4){
+      free(ponteiro->endereco);
       free(ponteiro);
     }
   }
