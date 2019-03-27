@@ -1,0 +1,20 @@
+fi, interv = np.histogram(df.Fare,bins=6)
+fi = pd.Series(fi)
+interv = pd.Series(interv)
+fr = fi/len(df.Fare)
+fr = pd.Series(fr)
+fc = np.cumsum(fi)
+total = pd.DataFrame(np.array([[len(df.Fare),1,'-']]),columns=['Fi','Fr','Fc'])
+total.index = ['Total']
+a = pd.concat([fi,fr,fc],axis=1)
+ap = list()
+
+array
+for x in range(len(interv)):
+    if(x==len(interv)-1):
+        break
+    string = str(interv[x])+' - '+str(interv[x+1])
+    ap.append(string)
+a.index = ap
+a.columns = ['Fi','Fr','Fc']
+a
